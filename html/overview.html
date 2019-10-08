@@ -1,0 +1,28 @@
+<div ng-app="app" ng-controller="RecordsCtrl">
+<h4><p style="text-align:center;">SELinux Status on Cluster Docker</p></h4> 
+<tabset>
+    <tab ng-repeat="cluster in clusters" heading="{{cluster}}" select="loadRecords(cluster)">  
+    <div id="wrapper">
+        <div id="content">
+            <div class="form-inline">
+                <button ng-disabled="currentPage == 0" ng-click="currentPage=0" class="btn btn-outline btn-primary btn-sm">First</button>
+                <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="btn btn-outline btn-primary btn-sm">Previous</button>
+                <label>{{currentPage+1}}/{{numberOfPages()}}</label>
+                <button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-outline btn-primary btn-sm">Next</button>
+                <button ng-disabled="currentPage == numberOfPages()-1" ng-click="currentPage=numberOfPages()-1" class="btn btn-outline btn-primary btn-sm">Last</button>
+                <label>Filter:</label> <input ng-model="q" id="search" ng-change="currentPage=0" class="form-control" style="width: 500px"> 
+                <label>Table Size:</label> <input ng-model="pageSize" type="number" placeholder="pageSize" class="form-control" style="width:70px">
+            </div>
+           <p></p>
+  <div style="overflow: auto; height:540px">
+
+    <div ng-show="Records[cluster]">
+      <div ng-include="'html/records.html'"></div>
+    </div>
+  </div>
+	</div>
+    </div>	
+    </tab>
+  </tabset>
+
+  </div>
